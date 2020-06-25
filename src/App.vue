@@ -1,28 +1,49 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="app">
+    <app-header />
+    <app-form @add-todo="onAddTodo" />
+    <app-list @remove="onTodoRemove" @done="onTodoDone" :todos="todos" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import AppHeader from "./components/AppHeader";
+import AppForm from "./components/AppForm";
+import AppList from "./components/AppList";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    AppHeader,
+    AppForm,
+    AppList
+  },
+  data() {
+    return {
+      todos: []
+    };
+  },
+  methods: {
+    onAddTodo(todo) {
+      this.todos.push(todo);
+    },
+    onTodoRemove(id) {
+      const idx = this.todos.findIndex(item => item.id === id);
+      if (idx >= 0) this.todos.splice(idx, 1);
+    },
+    onTodoDone(id) {
+      const { todos } = this;
+      const idx = todos.findIndex(item => item.id === id);
+      if (idx >= 0) {
+        todos.splice(idx, 1, { ...todos[idx], done: true });
+      }
+    }
   }
-}
+};
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.app {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin: 0 auto;
 }
 </style>
