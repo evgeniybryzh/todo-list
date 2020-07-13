@@ -46,9 +46,10 @@ export default {
 .todo-item {
   display: flex;
   align-items: center;
-  padding: 12px 0;
+  padding: 12px 10px;
   justify-content: space-between;
-  border-bottom: 1px solid $footer-black;
+  margin-bottom: 10px;
+  background-color: $light;
   &__row {
     display: flex;
     align-items: center;
@@ -59,6 +60,7 @@ export default {
     display: flex;
   }
   &__idx {
+    flex-basis: 1%;
     font-weight: 700;
     margin-right: 24px;
   }
@@ -66,6 +68,8 @@ export default {
     font-weight: 700;
     margin-right: 24px;
     flex: 0 0 40%;
+    flex-basis: 90%;
+    overflow: hidden;
   }
   &__action {
     padding: 2px 10px;

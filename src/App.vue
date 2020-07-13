@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app">
     <app-header />
-    <app-form @add-todo="onAddTodo" />
+    <app-form @add-todo="onAddTodo" :onClear="onClear" :todoStatus="findStatus()" />
     <app-list @remove="onTodoRemove" @done="onTodoDone" :todos="todos" />
   </div>
 </template>
@@ -36,7 +36,22 @@ export default {
       if (idx >= 0) {
         todos.splice(idx, 1, { ...todos[idx], done: true });
       }
+    },
+    onClear() {
+      this.todos = [];
+    },
+    findStatus() {
+      if (this.todos.length === 0) {
+        return false;
+      } else return true;
     }
+  },
+  updated() {
+    localStorage.removeItem("todos");
+    localStorage.setItem("todos", JSON.stringify(this.todos));
+  },
+  mounted() {
+    this.todos = JSON.parse(localStorage.todos);
   }
 };
 </script>

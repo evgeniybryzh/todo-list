@@ -4,10 +4,10 @@
       :idx="idx"
       :todo="item"
       class="list__item"
-      v-for="(item,idx) in todos"
+      v-for="(item, idx) in todos"
       :key="item.id"
-      @done=" onTodoDone"
-      @remove=" onTodoRemove"
+      @done="onTodoDone"
+      @remove="onTodoRemove"
     />
   </ol>
 </template>
@@ -16,15 +16,15 @@ import AppTodoItem from "./AppTodoItem.vue";
 export default {
   name: "AppList",
   components: {
-    AppTodoItem
+    AppTodoItem,
   },
   props: {
     todos: {
       type: Array,
       default() {
         return [];
-      }
-    }
+      },
+    },
   },
   methods: {
     onTodoDone(id) {
@@ -32,8 +32,8 @@ export default {
     },
     onTodoRemove(id) {
       this.$emit("remove", id);
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

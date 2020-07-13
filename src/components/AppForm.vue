@@ -1,8 +1,11 @@
 <template>
-  <form class="form" @submit.prevent="onAddTodo">
-    <input type="text" class="form__input" name="name" v-model="todo" />
-    <app-button class="form__button">ADD TODO</app-button>
-  </form>
+  <div>
+    <form class="form" @submit.prevent="onAddTodo">
+      <input type="text" class="form__input" name="name" v-model="todo" />
+      <app-button class="form__button">ADD TODO</app-button>
+    </form>
+    <app-button v-show="todoStatus" @click="onClear" class="button button__margined">CLEAR ALL</app-button>
+  </div>
 </template>
 <script>
 export default {
@@ -10,8 +13,10 @@ export default {
   data() {
     return {
       todo: ""
+      // status: this.todoStatus
     };
   },
+
   methods: {
     onAddTodo() {
       const todo = {
@@ -21,6 +26,12 @@ export default {
       };
       this.$emit("add-todo", todo);
       this.todo = "";
+    }
+  },
+  props: {
+    onClear: {},
+    todoStatus: {
+      type: Boolean
     }
   }
 };
@@ -38,6 +49,11 @@ export default {
     border: 3px solid $main-color;
     padding: 0 12px;
     @include font(sans-serif, 16px, 500, $footer-black);
+  }
+}
+.button {
+  &__margined {
+    margin-top: 30px;
   }
 }
 </style>
