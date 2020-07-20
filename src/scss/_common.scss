@@ -5,9 +5,7 @@
   scroll-behavior: smooth;
 }
 
-li {
-  // list-style: none;
-}
+
 
 input {
   outline: none;
@@ -16,4 +14,9 @@ input {
 a {
   text-decoration: none;
   color: $dark;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: scroll;
 }

@@ -1,7 +1,11 @@
 <template>
   <div id="app" class="app">
     <app-header />
-    <app-form @add-todo="onAddTodo" :onClear="onClear" :todoStatus="findStatus()" />
+    <app-form
+      @add-todo="onAddTodo"
+      :onClear="onClear"
+      :todoStatus="findStatus()"
+    />
     <app-list @remove="onTodoRemove" @done="onTodoDone" :todos="todos" />
   </div>
 </template>
@@ -15,11 +19,11 @@ export default {
   components: {
     AppHeader,
     AppForm,
-    AppList
+    AppList,
   },
   data() {
     return {
-      todos: []
+      todos: [],
     };
   },
   methods: {
@@ -27,15 +31,16 @@ export default {
       this.todos.push(todo);
     },
     onTodoRemove(id) {
-      const idx = this.todos.findIndex(item => item.id === id);
+      const idx = this.todos.findIndex((item) => item.id === id);
       if (idx >= 0) this.todos.splice(idx, 1);
     },
     onTodoDone(id) {
       const { todos } = this;
-      const idx = todos.findIndex(item => item.id === id);
+      const idx = todos.findIndex((item) => item.id === id);
       if (idx >= 0) {
-        todos.splice(idx, 1, { ...todos[idx], done: true });
+        todos[idx].done = true;
       }
+      localStorage.setItem("todos", JSON.stringify(this.todos));
     },
     onClear() {
       this.todos = [];
@@ -44,7 +49,7 @@ export default {
       if (this.todos.length === 0) {
         return false;
       } else return true;
-    }
+    },
   },
   updated() {
     localStorage.removeItem("todos");
@@ -52,7 +57,7 @@ export default {
   },
   mounted() {
     this.todos = JSON.parse(localStorage.todos);
-  }
+  },
 };
 </script>
 
@@ -60,5 +65,21 @@ export default {
 .app {
   text-align: center;
   margin: 0 auto;
+  background-image: url("./assets/images/bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+  background-attachment: inherit;
+  @include media-q($tablet-wide) {
+    text-align: center;
+    margin: 0 auto;
+    background-image: url("./assets/images/bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    background-attachment: fixed;
+  }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <button @click="()=>$emit('click')" class="button" :class="[size,type]">
+  <button @click="() => $emit('click')" class="button" :class="[size, type]">
     <slot />
   </button>
 </template>
@@ -9,36 +9,38 @@ export default {
   props: {
     size: {
       type: String,
-      default: "medium"
+      default: "medium",
     },
     type: {
       type: String,
-      default: "primary"
-    }
-  }
+      default: "primary",
+    },
+  },
 };
-</script><style lang="scss">
+</script>
+<style lang="scss">
 .button {
-  padding: 6px 32px;
+  padding: 18px 32px;
   background-color: $footer-black;
   @include font(sans-serif, 16px, 600, $main-color);
   border: none;
   outline: none;
   transition: 0.3s ease all;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   min-height: 32px;
   text-align: center;
   border: 3px solid $main-color;
   &:hover {
-    background-color: $dark;
+    background-color: $main-color;
+    @include font(sans-serif, 16px, 600, $dark);
   }
   &:active {
     background-color: $main-color;
     @include font(sans-serif, 16px, 600, $footer-black);
   }
   &.small {
-    padding: 6px 12px;
+    padding: 12px 12px;
     min-height: auto;
   }
   &.danger {

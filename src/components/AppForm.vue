@@ -4,7 +4,14 @@
       <input type="text" class="form__input" name="name" v-model="todo" />
       <app-button class="form__button">ADD TODO</app-button>
     </form>
-    <app-button v-show="todoStatus" @click="onClear" class="button button__margined">CLEAR ALL</app-button>
+    <transition name="fade">
+      <app-button
+        v-show="todoStatus"
+        @click="onClear"
+        class="button button__margined"
+        >CLEAR ALL</app-button
+      >
+    </transition>
   </div>
 </template>
 <script>
@@ -12,8 +19,7 @@ export default {
   name: "AppForm",
   data() {
     return {
-      todo: ""
-      // status: this.todoStatus
+      todo: "",
     };
   },
 
@@ -22,38 +28,58 @@ export default {
       const todo = {
         id: Date.now(),
         text: this.todo,
-        done: false
+        done: false,
       };
       this.$emit("add-todo", todo);
       this.todo = "";
-    }
+    },
   },
   props: {
     onClear: {},
     todoStatus: {
-      type: Boolean
-    }
-  }
+      type: Boolean,
+    },
+  },
 };
 </script>
 <style lang="scss">
 .form {
-  background-color: $footer-black;
+  background-color: rgba($color: #000000, $alpha: 0.5);
   display: flex;
+  flex-direction: column;
   padding: 24px;
+  @include media-q($tablet-small) {
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    display: flex;
+    padding: 24px;
+    flex-direction: row;
+  }
+
   &__input {
-    min-height: 32px;
-    margin-right: 24px;
+    min-height: 62px;
+    margin-right: 0px;
+    margin-bottom: 20px;
     flex: 1 1;
-    border-radius: 5px;
+    border-radius: 10px;
     border: 3px solid $main-color;
     padding: 0 12px;
-    @include font(sans-serif, 16px, 500, $footer-black);
+    background-color: rgba($color: #fff, $alpha: 0.5);
+    @include font(sans-serif, 26px, 500, $footer-black);
+    @include media-q($tablet-small) {
+      min-height: 32px;
+      margin-right: 24px;
+      flex: 1 1;
+      border-radius: 10px;
+      border: 3px solid $main-color;
+      padding: 0 12px;
+      @include font(sans-serif, 26px, 600, $footer-black);
+      margin-bottom: 0px;
+    }
   }
 }
 .button {
   &__margined {
-    margin-top: 30px;
+    margin-top: 25px;
   }
 }
 </style>
