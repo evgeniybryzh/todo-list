@@ -1,29 +1,13 @@
 <template>
   <li class="todo-item">
-    <div class="todo-item__row">
+    <div class="todo-item__row handle">
       <span class="todo-item__idx">{{ idx + 1 }}</span>
       <span class="todo-item__name">{{ todo.text }}</span>
-      <span
-        class="todo-item__status"
-        :style="{ backgroundColor: getStatusColor }"
-        >{{ getStatus }}</span
-      >
+      <span class="todo-item__status" :style="{ backgroundColor: getStatusColor }">{{ getStatus }}</span>
     </div>
     <div class="todo-item__buttons">
-      <app-button
-        @click="onTodoRemove"
-        size="small"
-        type="danger"
-        class="todo-item__action"
-        >REMOVE</app-button
-      >
-      <app-button
-        @click="onTodoDone"
-        size="small"
-        type="succes"
-        class="todo-item__action"
-        >DONE</app-button
-      >
+      <app-button @click="onTodoRemove" size="small" type="danger" class="todo-item__action">REMOVE</app-button>
+      <app-button @click="onTodoDone" size="small" type="succes" class="todo-item__action">DONE</app-button>
     </div>
   </li>
 </template>
@@ -33,12 +17,12 @@ export default {
   props: {
     idx: {
       type: Number,
-      required: true,
+      required: true
     },
     todo: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   computed: {
     getStatus() {
@@ -46,7 +30,7 @@ export default {
     },
     getStatusColor() {
       return this.todo.done ? "red" : "green";
-    },
+    }
   },
   methods: {
     onTodoDone() {
@@ -54,8 +38,8 @@ export default {
     },
     onTodoRemove() {
       this.$emit("remove", this.todo?.id);
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">
@@ -80,13 +64,13 @@ export default {
     align-items: center;
     flex-basis: auto;
     margin-right: 0px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     overflow: hidden;
     word-wrap: break-word;
     @include media-q($tablet-small) {
       @include flex-main(row, space-between, center);
       align-items: center;
-      flex-basis: 75%;
+      flex-basis: 100%;
       margin-right: 10px;
       overflow: hidden;
       margin-bottom: 0px;
@@ -103,16 +87,26 @@ export default {
   }
 
   &__idx {
-    // flex-basis: 2%;
     font-weight: 700;
-    margin-right: 10px;
+    margin-right: 5px;
     @include font(sans-serif, 30px, 600, $footer-black);
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 50px;
     @include flex-main(row, center, center);
     box-shadow: inset $dark 0 0 0 3px, inset #ffffff 0 0 0 6px,
       inset $dark 0 0 0 9px, inset #ffffff 0 0 0 8px;
     border-radius: 50%;
+    @include media-q($tablet-small) {
+      font-weight: 700;
+      margin-right: 10px;
+      @include font(sans-serif, 30px, 600, $footer-black);
+      width: 60px;
+      height: 60px;
+      @include flex-main(row, center, center);
+      box-shadow: inset $dark 0 0 0 3px, inset #ffffff 0 0 0 6px,
+        inset $dark 0 0 0 9px, inset #ffffff 0 0 0 8px;
+      border-radius: 50%;
+    }
   }
   &__name {
     font-weight: 700;

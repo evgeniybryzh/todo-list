@@ -7,6 +7,7 @@
     @end="onEnd"
     :animation="300"
     class="list"
+    handle=".handle"
   >
     <transition-group
       enter-active-class="animated slideInRight"
@@ -33,15 +34,15 @@ export default {
   name: "AppList",
   components: {
     AppTodoItem,
-    draggable,
+    draggable
   },
   props: {
     todos: {
       type: Array,
       default() {
         return [];
-      },
-    },
+      }
+    }
   },
   methods: {
     onTodoDone(id) {
@@ -52,14 +53,19 @@ export default {
     },
     onEnd() {
       localStorage.setItem("todos", JSON.stringify(this.todos));
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">
 .list {
   list-style-position: inside;
-  padding: 24px;
+  padding: 5px;
   list-style: none;
+  @include media-q($tablet-small) {
+    list-style-position: inside;
+    padding: 24px;
+    list-style: none;
+  }
 }
 </style>
