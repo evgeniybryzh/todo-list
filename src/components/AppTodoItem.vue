@@ -3,11 +3,27 @@
     <div class="todo-item__row handle">
       <span class="todo-item__idx">{{ idx + 1 }}</span>
       <span class="todo-item__name">{{ todo.text }}</span>
-      <span class="todo-item__status" :style="{ backgroundColor: getStatusColor }">{{ getStatus }}</span>
+      <span
+        class="todo-item__status"
+        :style="{ backgroundColor: getStatusColor }"
+        >{{ getStatus }}</span
+      >
     </div>
     <div class="todo-item__buttons">
-      <app-button @click="onTodoRemove" size="small" type="danger" class="todo-item__action">REMOVE</app-button>
-      <app-button @click="onTodoDone" size="small" type="succes" class="todo-item__action">DONE</app-button>
+      <app-button
+        @click="onTodoRemove"
+        size="small"
+        type="danger"
+        class="todo-item__action"
+        >REMOVE</app-button
+      >
+      <app-button
+        @click="onTodoDone"
+        size="small"
+        type="succes"
+        class="todo-item__action"
+        >DONE</app-button
+      >
     </div>
   </li>
 </template>
@@ -17,12 +33,12 @@ export default {
   props: {
     idx: {
       type: Number,
-      required: true
+      required: true,
     },
     todo: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     getStatus() {
@@ -30,7 +46,7 @@ export default {
     },
     getStatusColor() {
       return this.todo.done ? "red" : "green";
-    }
+    },
   },
   methods: {
     onTodoDone() {
@@ -38,8 +54,8 @@ export default {
     },
     onTodoRemove() {
       this.$emit("remove", this.todo?.id);
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">
@@ -109,7 +125,7 @@ export default {
     }
   }
   &__name {
-    font-weight: 700;
+    font-weight: 600;
     margin-right: 24px;
     overflow: hidden;
     flex-basis: 85%;
